@@ -1,0 +1,51 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#437972",
+    "titleBar.activeBackground": "#579D94",
+    "titleBar.activeForeground": "#F8FBFA"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/*_.java": true,
+    "**/generated-sources/**/*": true,
+    "**/node_modules": true,
+    "node_modules": true,
+    "packages/ui/public/lib": true
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.formatOnSave": true,
+  "emmet.includeLanguages": {
+    "svelte": "html"
+  },
+  "i18n-ally.localesPaths": ["packages/ui/src/i18n"],
+  "i18n-ally.keystyle": "flat",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.documentSelectors": [
+    "**/*.ts",
+    "**/*.js",
+    "**/*.svelte",
+    "**/*.html",
+    "**/*.css",
+    "**/*.scss",
+    "**/*.json"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "alwaysStrict": true,
+    "outDir": "./build/tsc",
+    "declaration": false,
+    "esModuleInterop": true,
+    "lib": ["DOM", "ES5"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "sourceMap": true,
+    "strict": false,
+    "target": "ES5",
+    "types": ["node"]
+  }
+}

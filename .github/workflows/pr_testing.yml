@@ -1,0 +1,43 @@
+name: Run linters, tests and checks against your PR
+on: [pull_request, push]
+
+jobs:
+  run_pr_checks:
+    name: Run linters, tests and checks against your PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Setup NodeJS"
+        uses: actions/setup-node@v1
+        with:
+          node-version: "15.3.0"
+
+      - uses: microsoft/playwright-github-action@v1
+
+      - name: "Setup Lerna"
+        run: npm install -g lerna@3.22.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-deps
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/packages/**/yarn.lock') }}
+
+      - name: Installing base dependencies
+        run: yarn install --frozen-lockfile
+        env:
+          NODE_ENV: development
+
+      - name: Run linters
+        run: yarn ci:lint
+
+      - name: Run tests
+        run: yarn ci:test

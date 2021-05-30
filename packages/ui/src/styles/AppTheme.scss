@@ -1,0 +1,161 @@
+@import 'Libs.scss';
+@import 'Colors.scss';
+@import 'BackgroundStyles.scss';
+@import 'ButtonStyles.scss';
+@import 'FlagIconStyles.scss';
+@import 'NotificationStyles.scss';
+@import 'Tabs.scss';
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+label,
+input,
+textarea,
+h5 {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+body,
+html {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+}
+
+#WEB3_CONNECT_MODAL_ID {
+  z-index: 100;
+}
+
+input,
+textarea,
+select,
+a {
+  outline: none;
+  &:focus,
+  &:focus-within {
+    &,
+    &.valid.dirty {
+      border: 2px solid var(--color-info);
+    }
+  }
+}
+
+.AppLayout {
+  min-height: 100%;
+  height: fit-content;
+}
+
+.header {
+  height: 3.8rem;
+  position: fixed;
+  top: 0;
+  z-index: 60;
+}
+
+.content {
+  margin-top: 3.8rem;
+  overflow-x: hidden;
+  width: 100vw;
+  display: flex;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.text-input {
+  box-shadow: 10px 10px 30px #d2d2d2, -10px -10px 20px #f7f7f7;
+  background: #ffffff;
+}
+
+.text-input-outline {
+  border: 0.1rem solid var(--color-info);
+  border-radius: 0.2rem;
+  background: #ffffff;
+}
+
+fieldset {
+  margin-bottom: 2rem;
+}
+
+:global(input.invalid),
+:global(textarea.invalid),
+:global(select.invalid) {
+  border: 2px solid var(--color-danger);
+}
+
+:global(label.invalid) {
+  color: var(--color-danger);
+
+  &::after {
+    content: '❌';
+    margin-left: 0.8em;
+    font-size: 0.7em;
+    position: relative;
+    top: -0.2em;
+  }
+}
+
+:global(label.valid.dirty) {
+  color: var(--color-success-dark);
+
+  &::after {
+    content: '✔️';
+    margin-left: 0.8em;
+    font-size: 0.7em;
+    position: relative;
+    top: -0.2em;
+  }
+}
+
+:global(input.valid.dirty),
+:global(textarea.valid.dirty),
+:global(select.valid.dirty) {
+  border: 2px solid var(--color-success-dark);
+}
+
+label {
+  color: var(--color-gray-dark);
+  margin-bottom: 1rem;
+  margin: 0 0 0.3rem 0.2rem;
+  display: inline-block;
+}
+
+.link {
+  &:link {
+    color: var(--color-info);
+  }
+
+  &:visited {
+    color: var(--color-info-dark);
+  }
+
+  &:hover {
+    color: var(--color-info-light);
+  }
+
+  &:active {
+    color: var(--color-info-dark);
+  }
+}
+
+.page-content {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.window-wrap .window .content {
+  max-width: calc(100% - 3rem);
+}
+
+@media (max-width: 768px) {
+  .bg .window-wrap {
+    margin: 1rem !important;
+  }
+}

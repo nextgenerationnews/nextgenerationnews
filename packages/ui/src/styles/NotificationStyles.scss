@@ -1,0 +1,14 @@
+body > .notifications {
+  z-index: 9999;
+}
+
+.notifications .default-position-style-bottom-right,
+.notifications .default-position-style-bottom-right .default-notification-style-content {
+  width: 100% !important;
+}
+
+@media (min-width: 768px) {
+  .notifications .default-position-style-bottom-right {
+    width: 380px !important;
+  }
+}

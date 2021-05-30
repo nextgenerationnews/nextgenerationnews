@@ -1,0 +1,18 @@
+{
+  "folders": [],
+  "settings": {
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#437972",
+      "titleBar.activeBackground": "#579D94",
+      "titleBar.activeForeground": "#F8FBFA"
+    },
+    "emmet.includeLanguages": {
+      "svelte": "html"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.workingDirectories": [{ "pattern": "./packages/*/" }],
+    "i18n-ally.localesPaths": ["packages/ui/src/i18n"],
+    "i18n-ally.pathMatcher": "{locale}.json",
+    "i18n-ally.enabledFrameworks": ["svelte"]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "root",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "svelte-i18n": "^3.3.9"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "husky": "^5.0.9"
+  },
+  "scripts": {
+    "postinstall": "husky install && lerna bootstrap",
+    "precommit-check": "lerna run --stream --concurrency 1 precommit-check",
+    "ci:lint": "lerna run --stream --concurrency 1 ci:lint",
+    "ci:test": "lerna run --stream --concurrency 1 ci:test",
+    "ci:build": "lerna run --stream --concurrency 1 ci:build"
+  }
+}

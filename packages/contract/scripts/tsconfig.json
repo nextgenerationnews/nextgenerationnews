@@ -1,0 +1,7 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["./*.ts"],
+  "compilerOptions": {
+    "types": ["node", "../build/types-migrations/types", "../build/types-migrations/index"]
+  }
+}

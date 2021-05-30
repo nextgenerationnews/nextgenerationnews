@@ -1,0 +1,89 @@
+{
+  "name": "contract",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "typechain-develop-server": {
+    "truffle-config": "./truffle-config.js",
+    "truffle-migrate-network": "development",
+    "compile-script": "yarn truffle compile",
+    "generate-types-script": "yarn generate-types",
+    "migrate-script": "yarn migrate",
+    "generate-lib-script": "yarn generate-lib --networkId='<NETWORK_ID>' --addresses='<ADDRESSES>'"
+  },
+  "typechain-lib-generator": {
+    "targets": [
+      "../ui/src/generated-contracts"
+    ],
+    "typechain-output-dir": "./build/types-lib",
+    "truffle-compile-output-dir": "./build/contracts",
+    "truffle-config": "./truffle-config.js"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix"
+    ]
+  },
+  "scripts": {
+    "start": "typechain-develop-server",
+    "postinstall": "yarn truffle compile && yarn generate-types && yarn generate-lib",
+    "test": "yarn start-server-and-test 'yarn test:ganache' http-get://google.com 'sleep 5 && yarn deploy:test && yarn truffle test --network test --stacktrace-extra'",
+    "test:ganache": "ganache-cli -i 9998 --port 8546 -l 99999999 -g 100 -q",
+    "test:watch": "yarn nodemon -e js,ts,sol -w ./src -w ./test --exec yarn test",
+    "generate-types:migrations": "yarn typechain --out-dir='./build/types-migrations' --target=truffle-v5 './build/contracts/*.json'",
+    "generate-types:lib": "yarn typechain --out-dir='./build/types-lib' --target=ethers-v5 './build/contracts/*.json'",
+    "generate-types": "yarn generate-types:migrations && yarn generate-types:lib",
+    "generate-development-data": "yarn ts-node ./scripts/generate-development-data.ts",
+    "migrate": "rm -rf ./build/migrations && tsc -p ./migrations/tsconfig.json --outDir ./build/migrations && truffle migrate",
+    "deploy:base": "truffle compile && yarn generate-types && yarn migrate-and-generate-lib",
+    "deploy:main": "yarn deploy:base main yarn migrate --network main -f $(yarn -s latest-migration main --next)",
+    "deploy:rinkeby": "yarn deploy:base rinkeby yarn migrate --network rinkeby -f $(yarn -s latest-migration rinkeby --next)",
+    "deploy:kovan": "yarn deploy:base kovan yarn migrate --network kovan -f $(yarn -s latest-migration kovan --next)",
+    "deploy:development": "yarn deploy:base development yarn migrate --network development -f $(yarn -s latest-migration development --next)",
+    "deploy:test": "yarn deploy:base test yarn migrate --network test -f $(yarn -s latest-migration test --next)",
+    "lint": "eslint --fix ./test ./migrations --ext=.js,.ts --max-warnings=0 && yarn lint:typecheck",
+    "lint:typecheck": "tsc -p ./test/tsconfig.json --noEmit && tsc -p ./migrations/tsconfig.json --noEmit",
+    "precommit-check": "lint-staged",
+    "ci:lint": "eslint ./test ./migrations --ext=.js,.ts --max-warnings=0 && yarn lint:typecheck",
+    "ci:test": "yarn test",
+    "ci:build": "echo 'Nothing to build here...'",
+    "latest-migration": "truffle-latest-migration ./truffle-config.js ./deployed_contracts/addresses.json ./build/contracts/Migrations.json"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^0.1.6",
+    "@truffle/hdwallet-provider": "^1.2.2",
+    "@typechain/ethers-v5": "^7.0.0",
+    "@typechain/truffle-v5": "^5.0.0",
+    "@types/bn.js": "^5.1.0",
+    "@types/chai": "^4.2.15",
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^15.3.0",
+    "@types/nodemon": "^1.19.0",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "chalk": "^4.1.0",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-problems": "^5.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "ganache-cli": "^6.12.2",
+    "ganache-core": "^2.13.2",
+    "lint-staged": "^10.5.4",
+    "node-notifier": "^9.0.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "start-server-and-test": "^1.12.0",
+    "string-argv": "^0.3.1",
+    "truffle": "5.1.65",
+    "truffle-latest-migration": "^2.0.1",
+    "ts-node": "^9.1.1",
+    "typechain": "^5.0.0",
+    "typechain-develop-server": "^1.2.0",
+    "typechain-lib-generator": "^2.0.1",
+    "typescript": "^4.1.5"
+  },
+  "devDependencies": {
+    "openzeppelin-solidity": "^4.1.0"
+  }
+}

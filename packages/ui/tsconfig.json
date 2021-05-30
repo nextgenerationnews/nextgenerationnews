@@ -1,0 +1,52 @@
+{
+  "include": ["./webpack.config.ts", "./src/**/*"],
+  "exclude": ["node_modules/*", "public/*"],
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "outDir": "./build",
+    "module": "esnext",
+    "importsNotUsedAsValues": "remove",
+    "importHelpers": false,
+    "baseUrl": "./",
+    "paths": {
+      "components/*": ["./src/components/*"],
+      "lazy-loaded/*": ["./src/lazy-loaded/*"],
+      "generated-contracts/*": ["./src/generated-contracts/*"],
+      "i18n/*": ["./src/i18n/*"],
+      "models/*": ["./src/models/*"],
+      "pages/*": ["./src/pages/*"],
+      "services/*": ["./src/services/*"],
+      "styles/*": ["./src/styles/*"],
+      "stores/*": ["./src/stores/*"],
+      "test-utils/*": ["./src/test-utils/*"],
+      "utils/*": ["./src/utils/*"],
+      "assets/*": ["./src/assets/*"]
+    },
+    "types": [
+      "node",
+      "webpack-dev-server",
+      "webpack",
+      "svelte",
+      "svelte/store",
+      "svelte/motion",
+      "svelte/transition",
+      "svelte/animate",
+      "svelte/easing",
+      "./src/types/editor-extensions",
+      "./src/types/globals",
+      "./src/types/mdi",
+      "./src/types/static",
+      "./src/types/svelte-forms",
+      "./src/types/svelte-notifications",
+      "./src/types/svelte-simple-modal",
+      "./src/types/svelte-ticker",
+      "./src/types/assets"
+    ]
+  }
+}

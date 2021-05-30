@@ -1,0 +1,45 @@
+name: Deploy UI
+on:
+  push:
+    branches:
+      - deploy_ui
+
+jobs:
+  deploy_ui:
+    name: Deploys UI to Netlify
+    runs-on: ubuntu-latest
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    steps:
+      - name: "Setup NodeJS"
+        uses: actions/setup-node@v1
+        with:
+          node-version: "15.3.0"
+
+      - name: "Setup Lerna"
+        run: npm install -g lerna@3.22.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-deps
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/packages/**/yarn.lock') }}
+
+      - name: Installing base dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build UI
+        run: yarn --cwd ./packages/ui build
+
+      - name: Deploy UI
+        run: yarn --cwd ./packages/ui deploy:production

@@ -1,0 +1,7 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["./*.ts"],
+  "compilerOptions": {
+    "types": ["node", "mocha", "chai", "../build/types-migrations/types", "../build/types-migrations/index"]
+  }
+}

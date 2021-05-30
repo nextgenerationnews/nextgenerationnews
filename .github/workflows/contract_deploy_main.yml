@@ -1,0 +1,50 @@
+name: Deploy Contract
+on:
+  push:
+    branches:
+      - contract_deploy_main
+
+jobs:
+  deploy_contract:
+    name: Deploys Contracts to the BlockChain (MAIN ETHEREUM NET)
+    runs-on: ubuntu-latest
+    env:
+      AUTH_MNEMONIC: ${{ secrets.CONTRACT_AUTH_MNEMONIC_MAIN }}
+      DEPLOY_URL: ${{ secrets.CONTRACT_DEPLOY_URL_MAIN }}
+    steps:
+      - name: "Setup NodeJS"
+        uses: actions/setup-node@v1
+        with:
+          node-version: "15.3.0"
+
+      - name: "Setup Lerna"
+        run: npm install -g lerna@3.22.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-deps
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/packages/**/yarn.lock') }}
+
+      - name: Installing base dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Deploy Contract
+        run: yarn --cwd ./packages/contract deploy:main
+
+      - name: Save the contract addresses back into the repo
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Sync contract address cache
+          file_pattern: '*.json'
