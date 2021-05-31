@@ -1,3 +1,6 @@
+# Litepaper
+[Litepaper Link](https://github.com/nextgenerationnews/nextgenerationnews/blob/main/packages/ui/src/assets/dexnews_litepaper.pdf)
+
 # 0xHack Instructions:
 
 - Clone the project
