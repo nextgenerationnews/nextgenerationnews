@@ -33,6 +33,8 @@ Inside of the contract folder "packages/contract" after the contracts have alrea
 
 - `yarn generate-development-data`
 
+Use the ganache local test provider in the connect wallet prompt. (the project has not yet been deployed to a mainnet/testnet)
+
 # DApp Screenshots
 
 ![image](https://user-images.githubusercontent.com/85082452/120127388-a48e2900-c195-11eb-9940-78b22c1203ff.png)|![image](https://user-images.githubusercontent.com/85082452/120127459-cedfe680-c195-11eb-8000-6767e987adc6.png)
